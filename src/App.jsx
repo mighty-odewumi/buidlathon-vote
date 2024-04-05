@@ -22,8 +22,12 @@ import {
 } from "firebase/auth";
 import Dashboard from "./pages/Dashboard";
 import PollInfo from "./pages/PollInfo";
+
 import SplashScreen from "./pages/SplashScreen";
+
 import { app } from "./firebase";
+import CreatePoll from './pages/CreatePoll';
+
 
 export default function App() {
 	const [userId, setUserId] = useState(null);
@@ -50,33 +54,50 @@ export default function App() {
 		return () => observer();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
+  
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <>
 
-	const router = createBrowserRouter(
-		createRoutesFromElements(
-			<>
+        <Route 
+          path="/signup" 
+          element={<SignUpPage />} 
+          action={signUpAction}
+          loader={signUpLoginLoader}
+        />
+        <Route 
+          path="/signin" 
+          element={<SignInPage />} 
+          action={signInAction}
+          loader={signInLoginLoader}
+        />
+        <Route 
+          path="/dashboard"
+          element={<Dashboard />}
+        />
+        <Route 
+          path="create"
+          element={<CreatePoll />}
+        />
+        <Route 
+          path="my-polls"
+          element={<h1>My polls</h1>}
+        />
+
+
 				<Route
 					path="/"
 					element={
 					<SplashScreen />}
 				/>
-				<Route
-					path="/signup"
-					element={<SignUpPage />}
-					action={signUpAction}
-					loader={signUpLoginLoader}
-				/>
-				<Route
-					path="/signin"
-					element={<SignInPage />}
-					action={signInAction}
-					loader={signInLoginLoader}
-				/>
+				
 				<Route path="/dashboard" element={<Dashboard />} />
 				<Route path="/pollinfo" element={<PollInfo />} />
 			
 			</>
 		)
 	);
+
 
 	return (
 		<>
