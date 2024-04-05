@@ -84,11 +84,10 @@ export default function SignUpPage() {
 
   return (
     <>
-      <h1>Sign up component here</h1>
-      {/* <Onboarding 
+      <Onboarding 
         errors={errors}
         navigation={navigation}
-      /> */}
+      />
     </>
   )
 }

@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import { Form, Link } from "react-router-dom";
-// import email from "../../assets/";
-// import password from "../../assets/";
-
+import email from "../assets/image1.svg";
+import password from "../assets/image2.svg";
+import name from "../assets/image3.svg";
 
 export default function Onboarding({ errors, navigation, queryString, pathname }) {
 

@@ -1,10 +1,11 @@
 import { useState, useEffect, } from 'react';
 import { Link, createBrowserRouter, createRoutesFromElements, RouterProvider, Route } from "react-router-dom";
-import SignUpPage from './pages/SignUp';
-import SignInPage from './pages/SignIn';
+import SignUpPage, { action as signUpAction } from './pages/SignUp';
+import SignInPage, { action as signInAction } from './pages/SignIn';
 import {  connectFirestoreEmulator, getFirestore, } from "firebase/firestore";
 import { onAuthStateChanged, getAuth, connectAuthEmulator, } from "firebase/auth";
 import { app } from "./firebase";
+
 
 export default function App() {
 
@@ -35,8 +36,16 @@ export default function App() {
     createRoutesFromElements(
       <>
         <Route path="/" />
-        <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/signin" element={<SignInPage />} />
+        <Route 
+          path="/signup" 
+          element={<SignUpPage />} 
+          action={signUpAction}
+        />
+        <Route 
+          path="/signin" 
+          element={<SignInPage />} 
+          action={signInAction}
+        />
       </>
     )
   );

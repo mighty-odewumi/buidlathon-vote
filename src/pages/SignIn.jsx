@@ -84,11 +84,10 @@ export default function SignInPage() {
 
   return (
     <>
-      <h1>Sign in component</h1>
-      {/* <Onboarding 
+      <Onboarding 
         errors={errors}
         navigation={navigation}
-      /> */}
+      />
     </>
   )
 }
