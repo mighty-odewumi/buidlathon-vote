@@ -21,6 +21,7 @@ import {
 	connectAuthEmulator,
 } from "firebase/auth";
 import Dashboard from "./pages/Dashboard";
+import PollInfo from "./pages/PollInfo"
 import { app } from "./firebase";
 
 export default function App() {
@@ -73,6 +74,7 @@ export default function App() {
 					loader={signInLoginLoader}
 				/>
 				<Route path="/dashboard" element={<Dashboard />} />
+				<Route path="/pollinfo" element={<PollInfo />} />
 			</>
 		)
 	);
