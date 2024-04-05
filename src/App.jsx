@@ -22,6 +22,9 @@ import {
 } from "firebase/auth";
 import Dashboard from "./pages/Dashboard";
 import PollInfo from "./pages/PollInfo";
+
+import SplashScreen from "./pages/SplashScreen";
+
 import { app } from "./firebase";
 import CreatePoll from './pages/CreatePoll';
 
@@ -55,14 +58,7 @@ export default function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <>
-        <Route 
-          path="/" 
-          element={
-            <>
-              <h1>Hello World</h1>
-            </>
-          }
-        />
+
         <Route 
           path="/signup" 
           element={<SignUpPage />} 
@@ -88,10 +84,20 @@ export default function App() {
           element={<h1>My polls</h1>}
         />
 
+
+				<Route
+					path="/"
+					element={
+					<SplashScreen />}
+				/>
+				
+				<Route path="/dashboard" element={<Dashboard />} />
 				<Route path="/pollinfo" element={<PollInfo />} />
-      </>
-    )
-  );
+			
+			</>
+		)
+	);
+
 
 	return (
 		<>
