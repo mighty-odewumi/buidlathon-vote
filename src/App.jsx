@@ -27,7 +27,8 @@ import SplashScreen from "./pages/SplashScreen";
 
 import { app } from "./firebase";
 import CreatePoll from './pages/CreatePoll';
-
+// import VoteInterface from "./pages/VoteInterface";
+import VoteMe from "./pages/VoteMe";
 
 export default function App() {
 	const [userId, setUserId] = useState(null);
@@ -91,12 +92,13 @@ export default function App() {
 					<SplashScreen />}
 				/>
 				
-				<Route path="/dashboard" element={<Dashboard />} />
+				 
 				<Route path="/pollinfo" element={<PollInfo />} />
-			
-			</>
-		)
-	);
+
+
+        <Route path="/poll" element={<VoteMe />} />
+      </>
+    )
 
 
 	return (
