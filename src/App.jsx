@@ -21,7 +21,8 @@ import {
 	connectAuthEmulator,
 } from "firebase/auth";
 import Dashboard from "./pages/Dashboard";
-import PollInfo from "./pages/PollInfo"
+import PollInfo from "./pages/PollInfo";
+import SplashScreen from "./pages/SplashScreen";
 import { app } from "./firebase";
 
 export default function App() {
@@ -56,10 +57,7 @@ export default function App() {
 				<Route
 					path="/"
 					element={
-						<>
-							<h1>Hello World</h1>
-						</>
-					}
+					<SplashScreen />}
 				/>
 				<Route
 					path="/signup"
@@ -75,6 +73,7 @@ export default function App() {
 				/>
 				<Route path="/dashboard" element={<Dashboard />} />
 				<Route path="/pollinfo" element={<PollInfo />} />
+			
 			</>
 		)
 	);
