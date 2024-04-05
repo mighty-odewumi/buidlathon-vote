@@ -7,8 +7,8 @@ import {
 	Route,
 } from "react-router-dom";
 import SignUpPage, {
-	action as signUpAction,
-	loader as signUpLoginLoader,
+	// action as signUpAction,
+	// loader as signUpLoginLoader,
 } from "./pages/SignUp";
 import SignInPage, {
 	action as signInAction,
@@ -63,8 +63,8 @@ export default function App() {
         <Route 
           path="/signup" 
           element={<SignUpPage />} 
-          action={signUpAction}
-          loader={signUpLoginLoader}
+          // action={signUpAction}
+          // loader={signUpLoginLoader}
         />
         <Route 
           path="/signin" 

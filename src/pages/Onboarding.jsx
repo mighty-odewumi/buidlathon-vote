@@ -10,7 +10,9 @@ export default function Onboarding({
 	navigation,
 	queryString,
 	pathname,
-	setPollAction,
+	handleActionChange,
+	handleSubmit,
+	action,
 }) {
 	// const [pollAction, setPollAction] = useState("vote");
 
@@ -33,7 +35,7 @@ export default function Onboarding({
 					</h3>
 				)}
 
-				<Form method="post" replace>
+				<form method="post" onSubmit={handleSubmit}>
 					<div className="relative mb-4 ring-2 rounded-md">
 						<img
 							src={email}
@@ -104,8 +106,8 @@ export default function Onboarding({
 								name="actionSelect"
 								id="admin"
 								value="create"
-								// checked={"create"}
-								onChange={(e) => setPollAction(e.target.value)}
+								checked={action === 'create'}
+								onChange={handleActionChange}
 								className="h-4 w-4 text-primaryblue"
 							/>
 							&nbsp; Create a poll
@@ -120,9 +122,8 @@ export default function Onboarding({
 								name="actionSelect"
 								id="voter"
 								value="vote"
-								// // checked={pollAction == "vote"}
-								// checked={"vote"}
-								onChange={(e) => setPollAction(e.target.value)}
+								checked={action === 'vote'}
+								onChange={handleActionChange}
 								className="h-4 w-4 text-primaryblue"
 							/>
 							&nbsp; Vote on a poll
@@ -137,13 +138,13 @@ export default function Onboarding({
 
 					<button
 						className="rounded-md bg-primaryblue text-white py-2 px-4 w-full mb-4 hover:bg-bluegradient transition-all"
-						disabled={navigation.state === "submitting"}
+						disabled={navigation?.state === "submitting"}
 					>
 						{pathname === "/signin"
-							? navigation.state === "submitting"
+							? navigation?.state === "submitting"
 								? "Signing in..."
 								: "Sign in"
-							: navigation.state === "submitting"
+							: navigation?.state === "submitting"
 							? "Signing up..."
 							: "Sign up"}
 					</button>
@@ -153,7 +154,7 @@ export default function Onboarding({
 							{errors.firebaseErr}
 						</span>
 					)}
-				</Form>
+				</form>
 
 				<p className="text-center">
 					{pathname === "/signin" ? (
