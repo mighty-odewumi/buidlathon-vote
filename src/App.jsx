@@ -1,16 +1,19 @@
 import { useState, useEffect, } from 'react';
 import { Link, createBrowserRouter, createRoutesFromElements, RouterProvider, Route } from "react-router-dom";
-import SignUpPage from './pages/SignUp';
-import SignInPage from './pages/SignIn';
+import SignUpPage, { action as signUpAction, loader as signUpLoginLoader } from './pages/SignUp';
+import SignInPage, { action as signInAction, loader as signInLoginLoader } from './pages/SignIn';
 import {  connectFirestoreEmulator, getFirestore, } from "firebase/firestore";
 import { onAuthStateChanged, getAuth, connectAuthEmulator, } from "firebase/auth";
 import { app } from "./firebase";
+
 
 export default function App() {
 
   const [userId, setUserId] = useState(null);
 
   const db = getFirestore();
+
+  // localStorage.clear();
 
   useEffect(() => {
     const auth = getAuth(app);
@@ -34,9 +37,26 @@ export default function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <>
-        <Route path="/" />
-        <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/signin" element={<SignInPage />} />
+        <Route 
+          path="/" 
+          element={
+            <>
+              <h1>Hello World</h1>
+            </>
+          }
+        />
+        <Route 
+          path="/signup" 
+          element={<SignUpPage />} 
+          action={signUpAction}
+          loader={signUpLoginLoader}
+        />
+        <Route 
+          path="/signin" 
+          element={<SignInPage />} 
+          action={signInAction}
+          loader={signInLoginLoader}
+        />
       </>
     )
   );

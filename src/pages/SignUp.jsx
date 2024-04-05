@@ -2,19 +2,23 @@
 import { useActionData, useLoaderData, useNavigate, useNavigation } from "react-router-dom";
 import Onboarding from "./Onboarding";
 import { authSignUp } from "../auth/authSignUp";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase";
 
 export async function loader({ request }) {
-  return null;
+  const url = new URL(request.url).searchParams.get("message");
+  const pathname = new URL(request.url).pathname;
+  return [url, pathname];
 }
 
 export async function action({ request }) {
   const formData = await request.formData();
   const email = formData.get("email");
   const password = formData.get("password");
-  console.log(email, password);
+  const name = formData.get("name");
+  const pollAction = formData.get("actionSelect");
+  console.log(email, password, name, pollAction);
 
   const errors = {};
 
@@ -26,12 +30,20 @@ export async function action({ request }) {
     errors.password = "Your password is less than 8 characters! ;)";
   }
 
+  if (name === "") {
+    errors.name = "Please input your name! ;)";
+  }
+
+  if (pollAction === "") {
+    errors.pollAction = "Please select what you would love to do! ;)";
+  }
+
   if (Object.keys(errors).length) {
     return errors;
   }
 
   try {
-    const data = await authSignUp(email, password);
+    const data = await authSignUp(email, password, name);
     console.log(data);
    
   } catch (err) {
@@ -52,26 +64,32 @@ export async function action({ request }) {
 
       return errors;
   }
-  return null;
+  return pollAction;
 }
 
 
 export default function SignUpPage() {
   // const auth = getAuth();
 
-  const data = useLoaderData();
-  console.log(data);
+  const [pollAction, setPollAction] = useState("");
+  console.log(pollAction);
 
-  const errors = useActionData();
+  const loaderData = useLoaderData();
+  console.log(loaderData);
+
+  const actionData = useActionData();
   const navigation = useNavigation();
   const navigate = useNavigate();
-  
+  const queryString = loaderData[0];
+  const pathname = loaderData[1];
+  // const pollAction = actionData?.pollAction;
+
   useEffect(() => {
     const observer = onAuthStateChanged(auth, (user) => {
       if (user) {
         console.log(user);
         localStorage.setItem("loggedIn", true);
-        return navigate(`/{admin ? dashboard : "polls"}`, { replace: true });
+        return navigate(`/${pollAction === "create" ? "dashboard" : "polls"}`, { replace: true });
       } else {
           localStorage.removeItem("loggedIn");
       }
@@ -84,11 +102,14 @@ export default function SignUpPage() {
 
   return (
     <>
-      <h1>Sign up component here</h1>
-      {/* <Onboarding 
-        errors={errors}
+      <Onboarding 
+        errors={actionData}
         navigation={navigation}
-      /> */}
+        queryString={queryString}
+        pathname={pathname}
+        pollAction={pollAction}
+        setPollAction={setPollAction}
+      />
     </>
   )
 }
