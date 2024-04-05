@@ -24,7 +24,8 @@ import Dashboard from "./pages/Dashboard";
 import PollInfo from "./pages/PollInfo";
 import { app } from "./firebase";
 import CreatePoll from './pages/CreatePoll';
-
+// import VoteInterface from "./pages/VoteInterface";
+import VoteMe from "./pages/VoteMe";
 
 export default function App() {
 	const [userId, setUserId] = useState(null);
@@ -89,6 +90,8 @@ export default function App() {
         />
 
 				<Route path="/pollinfo" element={<PollInfo />} />
+
+        <Route path="/poll" element={<VoteMe />} />
       </>
     )
   );
