@@ -6,18 +6,18 @@ import {
 	useNavigation,
 } from "react-router-dom";
 import Onboarding from "./Onboarding";
-import { authSignUp } from "../auth/authSignUp";
-import { useEffect, useState } from "react";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { auth } from "../firebase";
+// import { authSignUp } from "../auth/authSignUp";
+// import { useEffect, useState } from "react";
+// import { getAuth, onAuthStateChanged } from "firebase/auth";
+// import { auth } from "../firebase";
 
-export async function loader({ request }) {
+/* export async function loader({ request }) {
 	const url = new URL(request.url).searchParams.get("message");
 	const pathname = new URL(request.url).pathname;
 	return [url, pathname];
-}
+} */
 
-export async function action({ request }) {
+/* export async function action({ request }) {
 	const formData = await request.formData();
 	const email = formData.get("email");
 	const password = formData.get("password");
@@ -69,13 +69,13 @@ export async function action({ request }) {
 		return errors;
 	}
 	return pollAction;
-}
+} */
 
-export default function SignUpPage() {
+/* export default function SignUpPage() {
 	// const auth = getAuth();
 
 	const [pollAction, setPollAction] = useState("");
-	console.log(pollAction);
+	// console.log(pollAction);
 
 	const loaderData = useLoaderData();
 	console.log(loaderData);
@@ -89,11 +89,11 @@ export default function SignUpPage() {
 
 	useEffect(() => {
 		const observer = onAuthStateChanged(auth, (user) => {
-			if (user) {
+			if (user && pollAction) {
 				console.log(user);
 				localStorage.setItem("loggedIn", true);
 				return navigate(
-					`/${pollAction === "create" ? "dashboard" : "polls"}`,
+					`/${pollAction === "create" ? "dashboard" : "poll"}`,
 					{ replace: true }
 				);
 			} else {
@@ -103,7 +103,7 @@ export default function SignUpPage() {
 
 		return () => observer();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [navigate]);
+	}, [navigate, pollAction]);
 
 	return (
 		<>
@@ -117,4 +117,45 @@ export default function SignUpPage() {
 			/>
 		</>
 	);
-}
+} */
+
+
+import { useState } from 'react';
+// import { useNavigate } from 'react-router-dom';
+
+const PollForm = () => {
+  const navigate = useNavigate();
+  const [action, setAction] = useState('');
+
+  const handleActionChange = (event) => {
+    setAction(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    // Redirect based on selected action
+    if (action === 'create') {
+      navigate('/dashboard');
+    } else if (action === 'vote') {
+      const pollId = '123'; // Replace with actual poll ID or logic to get poll ID
+      navigate(`/poll`);
+    }
+  };
+
+  return (
+    <>
+			<Onboarding
+				// errors={actionData}
+				// navigation={navigation}
+				// queryString={queryString}
+				// pathname={pathname}
+				action={action}
+				handleSubmit={handleSubmit}
+				handleActionChange={handleActionChange}
+			/>
+		</>
+  );
+};
+
+export default PollForm;
