@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { menu } from "../assets/menu.svg";
-import { profile } from "../assets/profile.svg";
-import { background } from "../assets/bg-img.svg";
+import menu from "../assets/menu.svg";
+import profile from "../assets/profile.svg";
+import background from "../assets/bg-img.svg";
 
 
 export default function Dashboard() {

@@ -2,9 +2,11 @@ import { useState, useEffect, } from 'react';
 import { Link, createBrowserRouter, createRoutesFromElements, RouterProvider, Route } from "react-router-dom";
 import SignUpPage, { action as signUpAction, loader as signUpLoginLoader } from './pages/SignUp';
 import SignInPage, { action as signInAction, loader as signInLoginLoader } from './pages/SignIn';
+import Dashboard from "./pages/Dashboard";
 import {  connectFirestoreEmulator, getFirestore, } from "firebase/firestore";
 import { onAuthStateChanged, getAuth, connectAuthEmulator, } from "firebase/auth";
 import { app } from "./firebase";
+import CreatePoll from './pages/CreatePoll';
 
 
 export default function App() {
@@ -56,6 +58,18 @@ export default function App() {
           element={<SignInPage />} 
           action={signInAction}
           loader={signInLoginLoader}
+        />
+        <Route 
+          path="/dashboard"
+          element={<Dashboard />}
+        />
+        <Route 
+          path="create"
+          element={<CreatePoll />}
+        />
+        <Route 
+          path="my-polls"
+          element={<h1>My polls</h1>}
         />
       </>
     )
