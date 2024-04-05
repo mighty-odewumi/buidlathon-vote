@@ -26,15 +26,15 @@ export default function Dashboard() {
 						</Link> */}
 					</div>
 					<div className="flex gap-[2rem] mt-[2rem] ">
-						<a
+						<Link to="/create"
 							className="bg-white p-[0.5rem] px-[1.4rem] rounded-[0.5rem] text-[0.87rem] font-medium transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 active:bg-blue-900 active:text-white"
 							href=""
 						>
 							Create poll
-						</a>
-						<a className="bg-white p-[0.5rem] px-[1.4rem] rounded-[0.5rem] text-[0.87rem] font-medium transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 active:bg-blue-900 active:text-white">
+						</Link>
+						<Link className="bg-white p-[0.5rem] px-[1.4rem] rounded-[0.5rem] text-[0.87rem] font-medium transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 active:bg-blue-900 active:text-white">
 							View Poll
-						</a>
+						</Link>
 					</div>
 				</div>
 			</div>
