@@ -1,0 +1,12 @@
+<svg width="132" height="132" viewBox="0 0 132 132" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g opacity="0.2">
+<path d="M66 66H0V0C36.4467 0 66 29.6267 66 66Z" fill="white"/>
+<path d="M0 66H66V132C29.5533 132 0 102.447 0 66Z" fill="white"/>
+<path d="M132 66H66V132C102.447 132 132 102.447 132 66Z" fill="white"/>
+<path d="M66 66H132V0C95.5533 0 66 29.6267 66 66Z" fill="white"/>
+</g>
+<path d="M66 92H26V52C48.0889 52 66 69.9556 66 92Z" fill="white"/>
+<path d="M26 92H66V132C43.9111 132 26 114.089 26 92Z" fill="white"/>
+<path d="M106 92H66V132C88.0889 132 106 114.089 106 92Z" fill="white"/>
+<path d="M66 92H106V52C83.9111 52 66 69.9556 66 92Z" fill="white"/>
+</svg>

@@ -20,7 +20,11 @@ function PollInfo() {
 	return (
 		<div
 			className="bg-gray-200 min-h-screen flex justify-center "
-			style={{ backgroundImage: `url(${background})` }}
+			style={{
+				backgroundImage: `url(${background})`,
+				backgroundRepeat: "no-repeat",
+				backgroundPosition: "center center",
+			}}
 		>
 			<div className="w-4/5 my-[3rem] ">
 				<div>
