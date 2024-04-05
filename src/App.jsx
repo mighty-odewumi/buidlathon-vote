@@ -11,8 +11,8 @@ import SignUpPage, {
 	// loader as signUpLoginLoader,
 } from "./pages/SignUp";
 import SignInPage, {
-	action as signInAction,
-	loader as signInLoginLoader,
+	// action as signInAction,
+	// loader as signInLoginLoader,
 } from "./pages/SignIn";
 import { connectFirestoreEmulator, getFirestore } from "firebase/firestore";
 import {
@@ -59,7 +59,7 @@ export default function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <>
-
+      
         <Route 
           path="/signup" 
           element={<SignUpPage />} 
@@ -69,8 +69,8 @@ export default function App() {
         <Route 
           path="/signin" 
           element={<SignInPage />} 
-          action={signInAction}
-          loader={signInLoginLoader}
+          // action={signInAction}
+          // loader={signInLoginLoader}
         />
         <Route 
           path="/dashboard"

@@ -1,12 +1,13 @@
 /* eslint-disable react-refresh/only-export-components */
 import { useActionData, useLoaderData, useNavigate, useNavigation } from "react-router-dom";
-import Onboarding from "./Onboarding";
+// import Onboarding from "./Onboarding";
 import { authSignUp } from "../auth/authSignUp";
 import { useEffect, useState } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase";
+import Onboarding  from "./LogInForm";
 
-export async function loader({ request }) {
+/* export async function loader({ request }) {
   const url = new URL(request.url).searchParams.get("message");
   const pathname = new URL(request.url).pathname;
   return [url, pathname];
@@ -113,3 +114,45 @@ export default function SignInPage() {
     </>
   )
 }
+*/
+
+
+// import { useState } from 'react';
+// import { useNavigate } from 'react-router-dom';
+
+const PollForm = () => {
+  const navigate = useNavigate();
+  const [action, setAction] = useState('');
+
+  const handleActionChange = (event) => {
+    setAction(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    // Redirect based on selected action
+    if (action === 'create') {
+      navigate('/dashboard');
+    } else if (action === 'vote') {
+      const pollId = '123'; // Replace with actual poll ID or logic to get poll ID
+      navigate(`/poll`);
+    }
+  };
+
+  return (
+    <>
+			<Onboarding
+				// errors={actionData}
+				// navigation={navigation}
+				// queryString={queryString}
+				// pathname={pathname}
+				action={action}
+				handleSubmit={handleSubmit}
+				handleActionChange={handleActionChange}
+			/>
+		</>
+  );
+};
+
+export default PollForm;
