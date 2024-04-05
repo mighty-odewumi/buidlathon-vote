@@ -1,23 +1,34 @@
 /* eslint-disable react/prop-types */
+// import { useState } from "react";
 import { Form, Link } from "react-router-dom";
-import email from "../assets/image1.svg";
-import password from "../assets/image2.svg";
-import name from "../assets/image3.svg";
+import email from "../assets/image3.svg";
+import password from "../assets/image1.svg";
+import name from "../assets/image2.svg";
 
-export default function Onboarding({ errors, navigation, queryString, pathname }) {
+export default function Onboarding({ errors, navigation, queryString, pathname, setPollAction }) {
+
+  // const [pollAction, setPollAction] = useState("vote");
 
   return (
     <>
       <div className="font-inter p-6 md:w-96 md:m-auto">
         
 
-        <h1 className="font-bold text-2xl mb-8 mt-10">
+        <h1 className="font-bold text-3xl mb-3 mt-10 text-primaryblue">
           {
             pathname === "/signin" 
               ? "Login"
               : "Register"
           }
         </h1>
+
+        <p className="font-medium text-md mb-8 mt-2">
+          {
+            pathname === "/signin" 
+              ? "Signin to your account"
+              : "Create an account"
+          }
+        </p>
 
         {(queryString) 
           && <h3 className="mt-4 mb-4 text-xl text-red-800">
@@ -26,7 +37,7 @@ export default function Onboarding({ errors, navigation, queryString, pathname }
         }
 
         <Form method="post" replace>
-          <div className="relative mb-4">
+          <div className="relative mb-4 ring-2 rounded-md">
             <img 
               src={email} 
               alt="email icon" 
@@ -36,7 +47,8 @@ export default function Onboarding({ errors, navigation, queryString, pathname }
               type="email" 
               name="email" 
               id="email" 
-              placeholder="Email"
+              placeholder="Email e.g. joshuaode@gmail.com"
+              required
               className="bg-gray-100 w-full  py-2 px-9 rounded-md"
             />
 
@@ -46,7 +58,7 @@ export default function Onboarding({ errors, navigation, queryString, pathname }
             }
           </div>
           
-          <div className="relative mb-4">
+          <div className="relative mb-4 ring-2 rounded-md">
             <img 
               src={password} 
               alt="password icon" 
@@ -56,7 +68,8 @@ export default function Onboarding({ errors, navigation, queryString, pathname }
               type="password" 
               name="password" 
               id="password" 
-              placeholder="Password"
+              placeholder="Password e.g. i'llB37h@"
+              required
               className="bg-gray-100 w-full py-2 px-9 rounded-md"
             />
             {
@@ -65,27 +78,69 @@ export default function Onboarding({ errors, navigation, queryString, pathname }
             }
           </div>
 
-          <div className="relative mb-4">
-            <img 
-              src={name} 
-              alt="name icon" 
-              className="w-4 absolute top-3 left-3"
-            />
-            <input 
-              type="name" 
-              name="name" 
-              id="name" 
-              placeholder="Your name"
-              className="bg-gray-100 w-full py-2 px-9 rounded-md"
-            />
+          {pathname === "/signup" && (
+            <div className="relative mb-4 ring-2 rounded-md">
+              <img 
+                src={name} 
+                alt="name icon" 
+                className="w-4 absolute top-3 left-3"
+              />
+              <input 
+                type="name" 
+                name="name" 
+                id="name" 
+                placeholder="Your name e.g. Joshua Odetunde"
+                // required
+                className="bg-gray-100 w-full py-2 px-9 rounded-md"
+              />
+              {
+                errors?.name 
+                  && <span className="text-sm ">{errors.name}</span>
+              }
+            </div>)
+          }
+
+          <div className="mb-4 flex flex-col ring rounded-md p-4">
+            <label 
+              htmlFor="admin"
+              className="inline-flex items-center mb-2"
+            >
+              <input
+                type="radio" 
+                name="actionSelect" 
+                id="admin" 
+                value="create"
+                // checked={"create"}
+                onChange={(e) => setPollAction(e.target.value)}
+                className="h-4 w-4 text-primaryblue"
+              />&nbsp; Create a poll
+            </label>
+
+            <label 
+              htmlFor="voter"
+              className="inline-flex items-center"
+            >
+              <input 
+                type="radio" 
+                name="actionSelect" 
+                id="voter" 
+                value="vote"
+                // // checked={pollAction == "vote"}
+                // checked={"vote"}
+                onChange={(e) => setPollAction(e.target.value)}
+                className="h-4 w-4 text-primaryblue"
+              />&nbsp; Vote on a poll
+            </label>
+            
             {
-              errors?.name 
-                && <span className="text-sm ">{errors.name}</span>
+              errors?.pollAction 
+                && <span className="text-sm ">{errors.pollAction}</span>
             }
           </div>
 
+
           <button 
-            className="rounded-md bg-blue-500 text-white py-2 px-4 w-full mb-4 hover:bg-bluegradient transition-all"
+            className="rounded-md bg-primaryblue text-white py-2 px-4 w-full mb-4 hover:bg-bluegradient transition-all"
             disabled={navigation.state === "submitting"}
           >
             {pathname === "/signin" 
@@ -118,7 +173,7 @@ export default function Onboarding({ errors, navigation, queryString, pathname }
                     
                     <Link 
                       to="/signup"
-                      className="text-bluegradient "
+                      className="text-primaryblue"
                     >
                       &nbsp;Sign up
                     </Link>  
@@ -130,7 +185,7 @@ export default function Onboarding({ errors, navigation, queryString, pathname }
                     <span>Already have an account?</span> 
                     <Link 
                       to="/signin"
-                      className="text-bluegradient "
+                      className="text-primaryblue"
                     >
                     &nbsp;Log in
                     </Link>
