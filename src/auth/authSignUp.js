@@ -3,12 +3,12 @@ import { addDoc, collection, getFirestore } from "firebase/firestore";
 
 // Functional React component
 // eslint-disable-next-line react/prop-types
-export async function authSignUp(email, password) {
+export async function authSignUp(email, password, name) {
 
-  console.log(email, password);
+  console.log(email, password, name);
 
   const auth = getAuth();
-
+  
   // Function that signs up a user
   // Imported from firebase package
   try {
@@ -24,7 +24,7 @@ export async function authSignUp(email, password) {
     await addDoc(usersRef, {
       uid: user.uid,
       email: email,
-      // username: username
+      username: name,
     });
 
     console.log("User entry created successfully!");
